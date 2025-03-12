@@ -1,11 +1,3 @@
-import { createPinia } from 'pinia'
-
-const pinia = createPinia()
-
-export default pinia
-
-// 示例 userStore
-// store/user.js
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
