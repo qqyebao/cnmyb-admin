@@ -32,8 +32,21 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // 校验是否已经登录，未登录跳转登录页面
   const userStore = useUserStore();
-  if(userStore.$state.token === ''){
-    return { name: 'Login' }
+  console.log(userStore.$state.token)
+  if (userStore.$state.token === '') {
+    // 如果未登录且目标路由不是登录页面，则跳转到登录页面
+    if (to.name !== 'Login') {
+      next({ name: 'Login' });
+    } else {
+      next();
+    }
+  } else {
+    // 如果已登录且目标路由是登录页面，则跳转到首页
+    if (to.name === 'Login') {
+      next('/');
+    } else {
+      next();
+    }
   }
 })
 

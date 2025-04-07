@@ -55,6 +55,8 @@ export default {
     const activeIndex = ref(route.path)
     const menuItems = ref([])
 
+    console.log(process.env.VUE_APP_BASE_API)
+
     onMounted(async () => {
       try {
         const response = await axios.get('/api/routes')
