@@ -55,7 +55,7 @@ export default {
     const activeIndex = ref(route.path)
     const menuItems = ref([])
 
-    console.log(process.env.VUE_APP_BASE_API)
+    console.log(import.meta.env.VITE_APP_BASE_API)
 
     onMounted(async () => {
       try {

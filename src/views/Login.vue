@@ -18,7 +18,7 @@
 import { reactive } from 'vue'
 import { useUserStore } from '@/store/user.js'
 import { useRouter } from 'vue-router'
-import axios from '@/api/request'
+import axios from '@/utils/request.js'
 
 const form = reactive({
   username: '',
