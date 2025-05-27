@@ -4,14 +4,15 @@
     <el-aside width="260px">
       <div class="sidebar">
         <h3>数字钱包</h3>
-        <!-- 侧边栏菜单 -->
-        <el-menu :default-active="activeIndex">
-          <el-menu-item v-for="item in menuItems" :key="item.index" :index="item.index" :route="{ path: item.path }">
-            <i :class="item.icon"></i>
-            <span>{{ item.title }}</span>
+      </div>
+      <el-aside width="200px">
+        <el-menu :default-active="$route.path" router>
+          <el-menu-item v-for="item in menuList" :key="item.path" :index="item.path">
+            <el-icon><component :is="item.meta.icon" /></el-icon>
+            {{ item.meta.title }}
           </el-menu-item>
         </el-menu>
-      </div>
+      </el-aside>
     </el-aside>
     <el-container>
       <!-- 顶部导航栏 -->
@@ -47,9 +48,11 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import Sidebar from "@/components/Sidebar.vue";
 
 export default {
   name: 'Layout',
+  components: {Sidebar},
   setup() {
     const route = useRoute()
     const activeIndex = ref(route.path)

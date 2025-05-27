@@ -1,15 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {useUserStore} from '@/store/user.js'
+import {loadMenusAndRoutes} from '@/router/dynamicRoutes.js'
 
-const routes = [
+const staticRoutes = [
   {
     path: '/',
     redirect: '/layout'
-  },
-  {
-    path: '/layout',
-    name: 'Layout',
-    component: import('@/layout/Layout.vue')
   },
   // 其他路由配置
   {
@@ -26,27 +22,26 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes: staticRoutes
 })
 
 router.beforeEach((to, from, next) => {
   // 校验是否已经登录，未登录跳转登录页面
   const userStore = useUserStore();
-  console.log(userStore.$state.token)
-  if (userStore.$state.token === '') {
+  console.log(userStore.token)
+  console.log(to.name)
+  console.log(userStore.isRouteLoaded)
+  if (userStore.token === '') {
     // 如果未登录且目标路由不是登录页面，则跳转到登录页面
     if (to.name !== 'Login') {
-      next({ name: 'Login' });
-    } else {
-      next();
+      return next({ name: 'Login' });
     }
+    return next()
+  } else if (!userStore.isRouteLoaded){
+    loadMenusAndRoutes(userStore.userInfo.id).then(r => {userStore.setIsRouteLoaded(true)})// 添加动态路由
+    next({ ...to, replace: true });
   } else {
-    // 如果已登录且目标路由是登录页面，则跳转到首页
-    if (to.name === 'Login') {
-      next('/');
-    } else {
-      next();
-    }
+    return next()
   }
 })
 

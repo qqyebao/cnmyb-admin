@@ -3,7 +3,9 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
     state:() => {return {
         token: localStorage.getItem('token') || '',
+        isRouteLoaded: false,
         userInfo: {
+            id: '',
             name: '',
             avatar: ''
         }
@@ -15,6 +17,9 @@ export const useUserStore = defineStore('user', {
         },
         async getUserInfo() {
             // 实际调用API
-        }
+        },
+        setIsRouteLoaded(isRouteLoaded) {
+            this.isRouteLoaded = isRouteLoaded
+        },
     }
 })
