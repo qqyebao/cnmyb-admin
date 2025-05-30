@@ -3,7 +3,7 @@
     <!-- 侧边栏 -->
     <el-aside width="260px">
       <div class="sidebar">
-        <h3>数字钱包</h3>
+        <h3>DEMO</h3>
       </div>
       <el-aside width="200px">
         <el-menu :default-active="$route.path" router>

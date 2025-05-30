@@ -29,3 +29,10 @@ Mock.mock('/menu/tree', 'get', {
     ]
 })
 
+
+Mock.mock('/menu/permissions', 'get', {
+    code: 200,
+    msg:  '请求成功',
+    data: ['sys.user.list.add','sys.user.list.edit']
+})
+

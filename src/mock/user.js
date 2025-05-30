@@ -7,12 +7,21 @@ Mock.mock('/api/login', 'post', {
     }
 })
 
-Mock.mock('/api/user', 'get', {
+Mock.mock('/user/info', 'get', {
     code: 200,
     data: {
         id: '@id',
         name: '@cname',
-        avatar: '@image(100x100)',
-        role: '@pick(["admin", "editor"])'
+        phone: '19100000001',
+        email: '111@qq.com',
+        deptList: [
+            {
+                id: '@id',
+                name: '@cname'
+            }
+        ],
+        currDeptId: '1111111',
+        currDeptName: '测试部门',
+        roleIdList: ['111','222']
     }
 })

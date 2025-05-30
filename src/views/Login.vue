@@ -16,21 +16,27 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { useUserStore } from '@/store/user.js'
+import { useAppStore } from '@/stores/index.js'
 import { useRouter } from 'vue-router'
 import axios from '@/utils/request.js'
+import { setCache } from '@/utils/cache.js'
 
 const form = reactive({
   username: '',
   password: ''
 })
-const userStore = useUserStore()
+const userStore = useAppStore()
 const router = useRouter()
 
 const handleLogin = async () => {
-  const res = await axios.post('/api/login', form)
-  userStore.setToken(res.data.token)
-  await router.push('/')
+  axios.post('/api/login', form).then(res => {
+    console.log('res', res);
+    setCache('token',true, res.data.token);
+    userStore.initAPP();
+    router.push('/');
+  }).catch(error => {
+    console.error('登录失败');
+  })
 }
 </script>
 

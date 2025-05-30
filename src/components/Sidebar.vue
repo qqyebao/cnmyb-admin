@@ -22,6 +22,6 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/store/user';
-const { menus } = useUserStore();
+import { useAppStore } from '@/stores/index.js';
+const { menus } = useAppStore();
 </script>
