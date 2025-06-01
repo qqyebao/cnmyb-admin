@@ -32,6 +32,9 @@ export const useAppStore = defineStore('user', {
                 getMenuTree(),
                 getPermissions()
             ]).then(([userInfo, menus, permissions]) => {
+                console.log("userInfo：",  userInfo.data)
+                console.log("permissions：",  permissions.data)
+                console.log("menus：",  menus.data)
                 if(userInfo.code !== 200){
                     console.error("初始化用户数据失败：",  userInfo.msg)
                 }

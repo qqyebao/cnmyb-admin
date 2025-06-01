@@ -30,7 +30,6 @@ const router = useRouter()
 
 const handleLogin = async () => {
   axios.post('/api/login', form).then(res => {
-    console.log('res', res);
     setCache('token',true, res.data.token);
     userStore.initAPP();
     router.push('/');

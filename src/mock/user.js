@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 
 Mock.mock('/api/login', 'post', {
     code: 200,
+    msg: '请求成功',
     data: {
         token: '@guid'
     }
@@ -9,6 +10,7 @@ Mock.mock('/api/login', 'post', {
 
 Mock.mock('/user/info', 'get', {
     code: 200,
+    msg: '请求成功',
     data: {
         id: '@id',
         name: '@cname',

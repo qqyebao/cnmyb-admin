@@ -3,7 +3,7 @@
     <!-- 侧边栏 -->
     <el-aside width="260px">
       <div class="sidebar">
-        <h3>DEMO</h3>
+        <h3>CNMYB 后台管理系统</h3>
       </div>
       <el-aside width="200px">
         <el-menu :default-active="$route.path" router>
@@ -58,11 +58,11 @@ export default {
     const activeIndex = ref(route.path)
     const menuItems = ref([])
 
-    console.log(import.meta.env.VITE_APP_BASE_API)
+    console.log('VITE_APP_BASE_API', import.meta.env.VITE_APP_BASE_API)
 
     onMounted(async () => {
       try {
-        const response = await axios.get('/api/routes')
+        const response = await axios.get('/menu/tree')
         menuItems.value = response.data
       } catch (error) {
         console.error('Failed to fetch menu items:', error)
